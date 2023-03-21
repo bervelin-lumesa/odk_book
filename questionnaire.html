@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Collecte de données mobile avec ODK - 2&nbsp; Questionnaires</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./intro-base-de-donnees.html" rel="next">
+<link href="./intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./images/logo-white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Collecte de données mobile avec ODK</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Avant propos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionnaire.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-base-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./odk-pour-la-collecte-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synchronisation-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projets.html" class="sidebar-item-text sidebar-link">Projets</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-aux-questionnaires" id="toc-introduction-aux-questionnaires" class="nav-link active" data-scroll-target="#introduction-aux-questionnaires"> <span class="header-section-number">2.1</span> Introduction aux questionnaires</a></li>
+  <li><a href="#processus-de-conception-du-questionnaire" id="toc-processus-de-conception-du-questionnaire" class="nav-link" data-scroll-target="#processus-de-conception-du-questionnaire"> <span class="header-section-number">2.2</span> Processus de conception du questionnaire</a></li>
+  <li><a href="#types-de-questions" id="toc-types-de-questions" class="nav-link" data-scroll-target="#types-de-questions"> <span class="header-section-number">2.3</span> Types de questions</a></li>
+  <li><a href="#présentation-du-questionnaire" id="toc-présentation-du-questionnaire" class="nav-link" data-scroll-target="#présentation-du-questionnaire"> <span class="header-section-number">2.4</span> Présentation du questionnaire</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Cette formation s’inscrit dans la logique d’une collecte de données utilsant les smartphones/tablettes. De ce fait, nous partirons de l’hypothèse selon laquelle nous disposons déjà d’un questionnaire papier à partir duquel nous allons créer le formulaire électronique.</p>
+<p>De ce fait, nous ne verrons pas comment élaborer un questionnaire, mais nous parlerons de quelques lignes directrices que doit respecter un bon questionnaire. Nous verrons également les différents types de questions que l’on peut retrouver dans un questionnaires.</p>
+<section id="introduction-aux-questionnaires" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction-aux-questionnaires"><span class="header-section-number">2.1</span> Introduction aux questionnaires</h2>
+<p>Un questionnaire est un ensemble de questions conçues pour obtenir des informations sur un sujet auprès d’un répondant. Les questionnaires sont au coeur du processus de collecte de données et ont un impact significatif sur la qualité des données car ils constituent le moyen de collecte. Les questions posées doivent correspondre aux objectifs de l’enquête et permettre la collecte d’informations pour l’analyse des données. Chaque question doit avoir une justification explicite pour être incluse dans le questionnaire et il est important de savoir pourquoi chaque question est posée et comment l’information sera utilisée. La formulation des questions doit être claire, logiquement ordonnée et facile à comprendre pour le répondant, tout en permettant des réponses précises. Enfin, un test du questionnaire devrait être effectué avant son utilisation, en utilisant des groupes de discussion ou un pré-test pour valider sa qualité.</p>
+<p>Un questionnaire bien conçu devrait :</p>
+<ul>
+<li>permettre la collecte des données avec efficience et le résultat devrait comprendre un nombre minimal d’erreurs et de données incohérentes,</li>
+<li>être convivial pour l’intervieweur et le répondant (s’il s’agit d’une enquête assistée par intervieweur),</li>
+<li>diminuer dans l’ensemble le coût et le temps de la collecte des données.</li>
+</ul>
+</section>
+<section id="processus-de-conception-du-questionnaire" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="processus-de-conception-du-questionnaire"><span class="header-section-number">2.2</span> Processus de conception du questionnaire</h2>
+<p>Le processus de conception du questionnaire commence par la formulation des objectifs de l’enquête et des besoins d’information et continue avec les étapes suivantes :</p>
+<ul>
+<li>consultation avec les utilisateurs des données et les répondants,</li>
+<li>examen des questionnaires précédents,</li>
+<li>version provisoire du questionnaire,</li>
+<li>examen et révision du questionnaire,</li>
+<li>mise à l’essai et révision du questionnaire,</li>
+<li>touche finale apportée au questionnaire.</li>
+</ul>
+</section>
+<section id="types-de-questions" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="types-de-questions"><span class="header-section-number">2.3</span> Types de questions</h2>
+<p>Il y a principalement deux types de questions : ouvertes et fermées.</p>
+<ul>
+<li>Les questions ouvertes sont celles pour lesquelles on ne donne pas les catégories de réponse au répondant. Le répondant donne un chiffre exact ou une réponse à la question dans ses propres mots par écrit dans le cas d’un questionnaire d’enquête par autodénombrement ou l’intervieweur enregistre la réponse intégralement.</li>
+</ul>
+<p>Voici un exemple de question ouverte :</p>
+<p><em>Quel est le problème majeur auquel est confroté votre communauté ?</em></p>
+<hr>
+<hr>
+<ul>
+<li>Les questions fermées comprennent des catégories de réponse inscrites sous la question. On répond à la question fermée en cochant une case ou en encerclant la réponse exacte dans la liste fournie. Les réponses possibles énumérées pour une question sont appelées <em>catégories de réponse</em> ou <em>modalités</em>.</li>
+</ul>
+<p><em>Combien de nuits cette moustiquaire a-t-elle été utilisée au cours de la semaine écoulée ? (sélectionnez une seule réponse)</em></p>
+<ul>
+<li><p><em>TOUTES LES NUITS ………………..1</em></p></li>
+<li><p><em>LA PLUPART DES NUITS (5-6) ….2</em></p></li>
+<li><p><em>CERTAINES NUITS (1-4) ………..3</em></p></li>
+<li><p><em>NON UTILISÉE LA SEMAINE DERNIÈRE ……..4</em></p></li>
+<li><p><em>MOUSTIQUAIRE NON UTILISÉE DU TOUT ………5</em></p></li>
+<li><p><em>NE SAIT PAS………..98</em></p></li>
+</ul>
+<p>Une question ouverte permet au répondant d’exprimer une réponse sans l’influence des catégories de réponse inscrites sous une question fermée. Ce choix permet cependant d’interpréter la question de différentes façons. Une question ouverte élargit donc la portée de la question en général et la version fermée donne au répondant des indices sur la manière d’interpréter la question. Une question fermée ramène aussi le répondant à un ensemble de réponses déterminées.</p>
+<p>Les questions ouvertes comme celle-ci : « Avez-vous des commentaires supplémentaires? » sont souvent posées à la fin des sections de questions ou à la fin du questionnaire. Le répondant a donc l’occasion d’ajouter tout ce qui est pertinent, à son avis, aux questions considérées dans le questionnaire. Certains répondants pourraient vouloir ajouter de l’information supplémentaire pour préciser une réponse. Il est important de prévoir ce genre d’information dans le questionnaire.</p>
+<p>Mais ce type de question (ouverte) représente un fardeau pour les réponses non numériques. Après la collecte, toutes les réponses différentes sont habituellement réparties en catégories et un code numérique leur est attribué pour faciliter le traitement et l’analyse des données. Les questions ouvertes se traduisent donc habituellement par un traitement plus cher, plus exposé aux erreurs et qui demandent plus de temps que les questions fermées</p>
+<p>Les questions fermées ont de nombreux avantages dont le plus important est qu’elles sont moins un fardeau pour les répondants, et la collecte et la saisie des données sont plus faciles et moins chères. Le répondant réagit plus rapidement et facilement parce qu’il choisit simplement la catégorie de réponse appropriée au lieu de formuler une réponse et de l’inscrire dans ses propres mots.</p>
+<p>Elles ont aussi des inconvients. Si les catégories de réponse ne sont pas clairement formulées, le répondant pourrait avoir davantage de problèmes que si la question posée était ouverte.</p>
+<p>Il y a plusieurs genres de questions fermées : les plus fréquemment utilisées sont les questions dichotomiques, à choix multiples, avec réponses à cocher, avec classement et avec échelle d’évaluation.</p>
+<ul>
+<li>Questions dichotomiques</li>
+</ul>
+<p>La question dichotomique est la version la plus simple d’une question fermée. Il s’agit souvent d’une question oui – non et elle sert à répartir les répondants en deux groupes distincts. La question dichotomique permet aussi la sélection pour éviter de demander aux répondants une série de questions qui ne s’appliquent pas à eux. La directive « Passez à la question X » est ensuite inscrite immédiatement après l’une des catégories de réponse et les répondants passent outre à certaines questions. Cette instruction est parfois appelée « aiguillage ».</p>
+<p>Par exemple :</p>
+<p><em>Avez-vous fumé des cigarettes hier?</em></p>
+<ul>
+<li><p><em>Oui</em></p></li>
+<li><p><em>Non………….Passez à la question 14</em></p></li>
+<li><p>Questions à choix multiples et avec réponses à cocher</p></li>
+</ul>
+<p>Les questions à choix multiples permettent au répondant de choisir plusieurs réponses sur base d’une liste.</p>
+<p>Voici un exemple de question à réponse multiple :</p>
+<p><em>Quels moyens de transport utilisez-vous pour vous rendre au travail ? (plusieurs réponses possibles)</em></p>
+<ul>
+<li><p><em>BUS……………..A</em></p></li>
+<li><p><em>TAXI……………..B</em></p></li>
+<li><p><em>TRAIN……………C</em></p></li>
+<li><p><em>AUTRES……………Z</em></p></li>
+<li><p>Questions avec classement</p></li>
+</ul>
+<p>Voici une liste de certains moyens dont les gens se servent pour trouver un emploi. Veuillez les classer par ordre d’efficacité en inscrivant « 1 » à la méthode qui serait la plus utile, selon vous, « 2 » à la méthode qui serait la plus utile en second lieu, et ainsi de suite.</p>
+<ul>
+<li><p><em>Envoi de curriculum vitae par la poste</em></p></li>
+<li><p><em>Annonces dans les journaux ou les revues Centres d’emploi du gouvernement</em></p></li>
+<li><p><em>Vérification auprès d’amis</em></p></li>
+<li><p><em>Service de placement privé</em></p></li>
+<li><p><em>Communication directe avec des employeurs</em></p></li>
+<li><p><em>Autre (veuillez préciser)</em></p></li>
+</ul>
+<p>Les répondants considèrent souvent que le classement des catégories est un fardeau, surtout si les points à classer sont très différents l’un de l’autre ou si l’interview se déroule au téléphone. Les questions avec classement posent un autre problème : les écarts l’importance des réponses classées sont inconnus et ne sont probablement pas équivalents, c’est-à-dire que l’écart entre 1 et 2 ne peut être considéré comme équivalent à l’écart entre 2 et 3.</p>
+<ul>
+<li>Questions avec échelle d’évaluation</li>
+</ul>
+<p>Les questions avec l’échelle d’évaluation demandent au répondant d’évaluer leur réponse, par exemple :</p>
+<p>Êtes-vous satisfait de notre service à la clientèle?</p>
+<ul>
+<li><p><em>Très satisfait</em></p></li>
+<li><p><em>Satisfait</em></p></li>
+<li><p><em>Insatisfait</em></p></li>
+<li><p><em>Très insatisfait</em></p></li>
+</ul>
+<p>La formulation d’une question avec échelle d’évaluation demande plusieurs considérations. Premièrement, combien de catégories devrait avoir l’échelle d’évaluation? Elle pourrait en avoir seulement deux – d’accord, pas d’accord – ou jusqu’à 10, à partir de 1 (sans importance) jusqu’à 10 (extrêmement important).</p>
+<p>Deuxièmement, une question se pose, à savoir si l’échelle d’évaluation devrait avoir ou non un choix neutre, par exemple, ni satisfait ni insatisfait. En l’absence d’une possibilité neutre, le répondant doit faire un choix. D’autre part, les répondants ont tendance à choisir la réponse neutre si elle est ajoutée. Il est possible d’ajouter le choix neutre dans un questionnaire assisté par intervieweur, mais sans l’offrir au répondant. Il est alors sélectionné seulement si le répondant l’exprime spontanément.</p>
+<p>Troisièmement, lors de la formulation d’une question avec échelle d’évaluation, il faut considérer l’ajout de la catégorie « Ne sais pas – pas d’opinion » ou « Sans objet », compte tenu de la question posée. Lorsque vous posez une question sur un service en particulier que le répondant n’a peut-être jamais utilisé, par exemple, il faut ajouter la catégorie « Sans objet ».</p>
+<p>Dans chacun de ces cas (nombre de catégories de l’échelle d’évaluation, ajout d’un choix neutre, recours à la catégorie « Sans objet »), la solution sera déterminée en tenant compte des objectifs de l’enquête, du point à coter, de la méthode de collecte des données et des préférences de l’organisme statistique.</p>
+</section>
+<section id="présentation-du-questionnaire" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="présentation-du-questionnaire"><span class="header-section-number">2.4</span> Présentation du questionnaire</h2>
+<p>A. Ordonnancement des questions</p>
+<p>L’ordre des questions devrait être conçu pour maintenir l’intérêt du répondant et l’inciter à remplir le questionnaire ou à répondre à l’interview. La séquence des questions devrait être logique pour le répondant et faciliter le rappel à la mémoire. Les questions devraient couler doucement de l’une à l’autre. Il faudrait regrouper les questions sur un même sujet.</p>
+<p>B. Énoncés de transition</p>
+<p>Les énoncés de transition des questionnaires servent à présenter des sections de questions connexes. Ils sont importants dans les questionnaires assistés par intervieweur parce qu’ils indiquent au répondant qu’un nouveau sujet sera considéré, par exemple :</p>
+<blockquote class="blockquote">
+<p>Partie A - Nous voulons d’abord obtenir des renseignements généraux sur votre exploitation agricole.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Partie B - Nous voulons maintenant obtenir de l’information sur votre superficie en culture l’an dernier.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Partie C - Les questions suivantes portent sur les déclarations de revenus de votre exploitation agricole l’an dernier.</p>
+</blockquote>
+<p>C. Instructions</p>
+<p>Le questionnaire assisté par intervieweur ou celui de l’enquête par autodénombrement devrait comprendre des instructions claires, brèves et faciles à trouver. Ces instructions peuvent être inscrites directement au-dessus des questions ciblées, au début du questionnaire, dans un guide distinct qui accompagne les questions, dans un encart, etc.</p>
+<p>Combien de pièces y a-t-il dans ce logement?</p>
+<ul>
+<li>Comptez la cuisine, les chambres à coucher, les pièces habitables au grenier ou au sous-sol,etc</li>
+</ul>
+<p>D. Considérations sur la mise en forme</p>
+<p>Il y a de nombreuses considérations à ne pas oublier lors de l’organisation des mots imprimés sur support papier ou affichés à l’écran. Il faudrait maintenir l’uniformité du style et de la police de caractères des questions, instructions, entêtes et énoncés de transition. Le recours à des polices et styles de caractères différents pour les questions et les instructions permet au répondant ou à l’intervieweur d’identifier facilement les questions. Les titres et entêtes de section ont habituellement une police de caractères plus larges que celle des questions et des catégories de réponse. Il faudrait énumérer consécutivement les questions d’un bout à l’autre du questionnaire. Des nombres, titres ou lettres peuvent indiquer les sections.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./intro-base-de-donnees.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

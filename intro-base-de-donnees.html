@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Collecte de données mobile avec ODK - 3&nbsp; Introduction aux bases de données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./odk-pour-la-collecte-de-donnees.html" rel="next">
+<link href="./questionnaire.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./images/logo-white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Collecte de données mobile avec ODK</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Avant propos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionnaire.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-base-de-donnees.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./odk-pour-la-collecte-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synchronisation-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projets.html" class="sidebar-item-text sidebar-link">Projets</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#définition" id="toc-définition" class="nav-link active" data-scroll-target="#définition"> <span class="header-section-number">3.1</span> Définition</a></li>
+  <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table"> <span class="header-section-number">3.2</span> Table</a></li>
+  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple"> <span class="header-section-number">3.3</span> Exemple</a></li>
+  <li><a href="#cardinalité" id="toc-cardinalité" class="nav-link" data-scroll-target="#cardinalité"> <span class="header-section-number">3.4</span> Cardinalité</a></li>
+  <li><a href="#type-de-variables-statistiques" id="toc-type-de-variables-statistiques" class="nav-link" data-scroll-target="#type-de-variables-statistiques"> <span class="header-section-number">3.5</span> Type de variables statistiques</a>
+  <ul class="collapse">
+  <li><a href="#variable-quantitative" id="toc-variable-quantitative" class="nav-link" data-scroll-target="#variable-quantitative"> <span class="header-section-number">3.5.1</span> Variable quantitative</a></li>
+  <li><a href="#variable-qualitative" id="toc-variable-qualitative" class="nav-link" data-scroll-target="#variable-qualitative"> <span class="header-section-number">3.5.2</span> Variable qualitative</a></li>
+  </ul></li>
+  <li><a href="#comment-choisir-les-noms-de-variables" id="toc-comment-choisir-les-noms-de-variables" class="nav-link" data-scroll-target="#comment-choisir-les-noms-de-variables"> <span class="header-section-number">3.6</span> Comment choisir les noms de variables ?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Ce chapitre est une introduction aux bases de données. Il s’agit de donner une vue globale sur ce que sont les bases de données sans entrer dans les détails de la théorie des bases de données.</p>
+<section id="définition" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="définition"><span class="header-section-number">3.1</span> Définition</h2>
+<p>Les données collectées sur terrain doivent être stockées pour leur utilisation future.</p>
+<p>Les bases de données jouent un rôle crucial dans la collecte de données avec ODK. Une base de données est un système de stockage d’informations organisées et structurées. Dans le contexte d’ODK, la base de données permet de stocker toutes les données collectées à partir du formulaire. Les données collectées peuvent être analysées, traitées et utilisées pour prendre des décisions éclairées. En utilisant une base de données, vous pouvez assurer la stabilité et l’accessibilité de vos données pour une utilisation future.</p>
+<p>Le modèle relationnel est le modèle le plus communement utilisé pour stocker les données. Dans une base de données relationnelle, les données sont stockées dans des tables.</p>
+</section>
+<section id="table" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="table"><span class="header-section-number">3.2</span> Table</h2>
+<p>Une table est un ensemble de données organisées sous forme d’un tableau où les colonnes correspondent à des attributs ou variales (une colonne peut stocker des numéros de téléphone, une autre le sexe…) et les lignes à des enregistrements, également appelés entrées.</p>
+</section>
+<section id="exemple" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="exemple"><span class="header-section-number">3.3</span> Exemple</h2>
+<p>Donnons un exemple :</p>
+<p>Vous êtes chargé de concevoir un formulaire pour collecter les données sur l’utilisation des moustiquaires comme moyen de prévention du paludisme par les ménages d’une contrée. Il est spécifié que vous devez collecter les données sur les chefs de ménages, chaque individu du ménage et les différentes moustiquaires. Sur base d’un questionnaire papier existant, vous créez un formulaire qui sera utilisé pour collecter les données.</p>
+<p>En terme de base de données, les données sur les chefs de ménages, les individus et les moustiquaires seront logées dans différentes tables de la base.</p>
+<p>La raison est que ces différentes entités représentent différentes unités statistiques. Aussi, à un ménage peut correspondre plusieurs individus et plusieurs moustiquaires. C’est ce qu’on appelle cardinalité. Séparer ces données dans différentes tables permet d’éviter de dupliquer inutilement les données (rédondance)</p>
+<p>L’image suivante montre les relations entre différentes tables dans la base de données de l’exemple précédent.</p>
+</section>
+<section id="cardinalité" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="cardinalité"><span class="header-section-number">3.4</span> Cardinalité</h2>
+<p>les différents chiffres entre parenthèses reprénsent les cardinalités.</p>
+<p>Ces cardinalités peuvent être expliquées comme suit :</p>
+<ul>
+<li>(0, n) veut dire qu’un ménage peut posséder aucune moustiquaire ou en posséder plusieurs,</li>
+<li>(1, 1) entre les tables <code>Menage</code> et <code>Moustiquaire</code> veut dire qu’une moustiquaire appartient à un et un seul ménage,</li>
+<li>(1, n) signifie qu’un ménage doit avoir au moins un individu,</li>
+<li>(1, 1) entre les tables <code>Menage</code> et <code>Individu</code> veut dire qu’un individu appartient à un et un seul ménage.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/relation.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">relations entre tables</figcaption><p></p>
+</figure>
+</div>
+<p>Les données d’une table peuvent se présenter sous forme d’une feuille Excel comme le montre l’image suivante.</p>
+<p>Les lignes représentent différentes ménages interrogés et les colonnes représentent les différentes variables permettant de décrire ces ménages.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/table.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Un fichier de données, une table sur Excel</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="type-de-variables-statistiques" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="type-de-variables-statistiques"><span class="header-section-number">3.5</span> Type de variables statistiques</h2>
+<p>Au sens statistique, une variable est un caractère permettant de décrire une unité statistique. Il peut s’agir par exemple du sexe, de l’âge, du statut professionnel et bien d’autres.</p>
+<p>Nous distinguons principalement deux types de variables : quantitative et qualitative.</p>
+<section id="variable-quantitative" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="variable-quantitative"><span class="header-section-number">3.5.1</span> Variable quantitative</h3>
+<p>Une variable quantitative est une variable qui peut être mesurée par des nombres réels. Elle permet de mesurer une grandeur numérique, un nombre, une quantité ou une mesure qui est exprimée en chiffres. Les variables quantitatives peuvent être classées soit comme discrètes (qui prennent des valeurs entières) soit comme continues (qui prennent des valeurs dans un continuum).</p>
+<p>Les exemples de variables quantitatives discrêtes incluent le nombre de personnes, le nombre de réponses correctes dans un test et ainsi de suite. Pour le cas continu, nous pouvons citer le poids, la taille, le revenu, la distance parcourue, l’âge exact, etc.</p>
+</section>
+<section id="variable-qualitative" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="variable-qualitative"><span class="header-section-number">3.5.2</span> Variable qualitative</h3>
+<p>Une variable qualitative est une variable qui mesure une caractéristique qui ne peut pas être mesurée en nombres. En d’autres termes, elle est utilisée pour décrire des qualités ou attributs plutôt que des quantités. Les variables qualitatives peuvent être catégorisées comme nominales ou ordinales. Les variables nominales comprennent des catégories qui n’ont pas de relation hiérarchique les unes avec les autres, telles que la couleur des yeux ou le genre. Les variables ordinales sont des catégories qui sont ordonnées hiérarchiquement, mais qui ne peuvent pas être mesurées en chiffres exacts, comme le niveau d’éducation ou le rang d’un participant dans une compétition.</p>
+</section>
+</section>
+<section id="comment-choisir-les-noms-de-variables" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="comment-choisir-les-noms-de-variables"><span class="header-section-number">3.6</span> Comment choisir les noms de variables ?</h2>
+<p>Lorsque vous créez un formulaire pour la collecte mobile, vous partez d’un qestionnaire papier. Il convient alors de trouver des noms de variables pour ces différentes questions. Alors comment choisir les noms de variables ?</p>
+<ul>
+<li><p>Utilisez des noms de variables clairs, descriptifs et informatifs. Évitez les noms génériques ou ambigus.</p></li>
+<li><p>Utilisez des noms de variables simples et concis.</p></li>
+<li><p>Utilisez des lettres minuscules pour le nom des variables. Évitez d’utiliser des espaces ou des caractères spéciaux.</p></li>
+<li><p>Assurez-vous que les noms de variables sont cohérents et correspondent bien aux questions du questionnaire papier.</p></li>
+</ul>
+<p>Pour faciliter la correspondance entre votre questionnaire papier et votre formulaire ODK, vous pouvez utiliser les mêmes noms pour les variables dans les deux cas (par exemple Q100, Q101, etc). Cela aidera à éviter toute confusion et à garantir que les données sont correctement transposées dans le formulaire ODK. Ceci est surtout conseillé lorsque votre question a un grand nombre de variables.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./questionnaire.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./odk-pour-la-collecte-de-donnees.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

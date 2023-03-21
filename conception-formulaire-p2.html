@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Collecte de données mobile avec ODK - 6&nbsp; Conception du formulaire : partie 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./synchronisation-de-donnees.html" rel="next">
+<link href="./conception-formulaire-p1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./images/logo-white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Collecte de données mobile avec ODK</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Avant propos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionnaire.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-base-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./odk-pour-la-collecte-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synchronisation-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projets.html" class="sidebar-item-text sidebar-link">Projets</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#attributs-des-variables" id="toc-attributs-des-variables" class="nav-link active" data-scroll-target="#attributs-des-variables"> <span class="header-section-number">6.1</span> Attributs des variables</a></li>
+  <li><a href="#opérateurs-logiques-et-relationnels" id="toc-opérateurs-logiques-et-relationnels" class="nav-link" data-scroll-target="#opérateurs-logiques-et-relationnels"> <span class="header-section-number">6.2</span> Opérateurs logiques et relationnels</a></li>
+  <li><a href="#sauts-et-contraintes" id="toc-sauts-et-contraintes" class="nav-link" data-scroll-target="#sauts-et-contraintes"> <span class="header-section-number">6.3</span> Sauts et contraintes</a>
+  <ul class="collapse">
+  <li><a href="#sauts" id="toc-sauts" class="nav-link" data-scroll-target="#sauts"> <span class="header-section-number">6.3.1</span> Sauts</a></li>
+  <li><a href="#contraintes" id="toc-contraintes" class="nav-link" data-scroll-target="#contraintes"> <span class="header-section-number">6.3.2</span> Contraintes</a></li>
+  </ul></li>
+  <li><a href="#groupe" id="toc-groupe" class="nav-link" data-scroll-target="#groupe"> <span class="header-section-number">6.4</span> Groupe</a></li>
+  <li><a href="#répétition" id="toc-répétition" class="nav-link" data-scroll-target="#répétition"> <span class="header-section-number">6.5</span> Répétition</a></li>
+  <li><a href="#sélection-en-cascade" id="toc-sélection-en-cascade" class="nav-link" data-scroll-target="#sélection-en-cascade"> <span class="header-section-number">6.6</span> Sélection en cascade</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="attributs-des-variables" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="attributs-des-variables"><span class="header-section-number">6.1</span> Attributs des variables</h2>
+<p>Un attribut de variable est une caractéristique qui décrit ou définit un comportement spécifique pour une variable. Il peut s’agir de rendre une question oblligatoire, de modifier son affichage, de la répéter un certain nombre de fois, et bien d’autres.</p>
+<table class="table">
+<caption>Les attributs de variables</caption>
+<thead>
+<tr class="header">
+<th>Attributs</th>
+<th>Utilité</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hint</td>
+<td>Ajouter un petit texte en bas de la question</td>
+</tr>
+<tr class="even">
+<td>required</td>
+<td>Rendre une question obligatoire (yes)</td>
+</tr>
+<tr class="odd">
+<td>constraint</td>
+<td>Imposer une contrainte à une question</td>
+</tr>
+<tr class="even">
+<td>constraint_message</td>
+<td>Afficher un message pour la contrainte</td>
+</tr>
+<tr class="odd">
+<td>relevant</td>
+<td>Effectuer un saut</td>
+</tr>
+<tr class="even">
+<td>calculation</td>
+<td>Effectuer un calcul</td>
+</tr>
+<tr class="odd">
+<td>default</td>
+<td>Définir une valeur par défaut pour une question</td>
+</tr>
+<tr class="even">
+<td>appearance</td>
+<td>Gérer l’apparence de questions sur l’écran</td>
+</tr>
+<tr class="odd">
+<td>repeat_count</td>
+<td>Répéter une question un certain nombre de fois</td>
+</tr>
+</tbody>
+</table>
+<p>Dans ce qui suit, nous allons voir comment mettre des sauts et contraintes dans un formulaire. Mais avant, voyons quelques opérateurs logiques et relationnels.</p>
+</section>
+<section id="opérateurs-logiques-et-relationnels" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="opérateurs-logiques-et-relationnels"><span class="header-section-number">6.2</span> Opérateurs logiques et relationnels</h2>
+<p>Ces opérateurs nous permettent d’écrire nos différentes conditions (contraintes et sauts).</p>
+<table class="table">
+<caption>Opérateurs logiques et relationnels</caption>
+<thead>
+<tr class="header">
+<th>Opérateurs logiques et relationnels</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>and</td>
+<td>et logique</td>
+</tr>
+<tr class="even">
+<td>or</td>
+<td>ou logique</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>supérieur à</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>supérieur ou égal à</td>
+</tr>
+<tr class="odd">
+<td>&lt;</td>
+<td>inférieur à</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>inférieur ou égal à</td>
+</tr>
+<tr class="odd">
+<td>=</td>
+<td>égalité logique (égal à)</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>pas égal à (différent de)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sauts-et-contraintes" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sauts-et-contraintes"><span class="header-section-number">6.3</span> Sauts et contraintes</h2>
+<p>Pour faire référence à une variable dans XLSForm, nous utilisons le signe dollar ($) suivi des parentahèses ourverte et fermée, à l’interieur desquelles vous mettez le nom de la variable, comme suit : ${nom_de_la_variable}. Mais lorsque nous sommes sur la ligne d’une variable donnée, nous pouvons faire référence à celle-ci par un simple point (.).</p>
+<section id="sauts" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="sauts"><span class="header-section-number">6.3.1</span> Sauts</h3>
+<p>Un saut est une instruction qui permet de sauter une ou plusieurs questions dans le formulaire. Dans un questionnaire papier, il correspond à l’instrution du genre “Si Q100 égal à Oui, allez à Q102”. Dans un formulaire XLSForm, il correspond à une instruction à mettre sur la ligne de la question qu’on veut sauter. De cette façon, la question à sauter sera affichée si la condition est vérifiée.</p>
+<p>Dans cet exemple, la question sur le nombre de mois de grossesse ne s’affiche à l’écran que si la femme a dit qu’elle est enceinte (“oui”).</p>
+<table class="table">
+<caption>Saut - feuile survey</caption>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+<th>relevant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>select_one ouinon_list</td>
+<td>grossesse</td>
+<td>Etes-vous enceinte ?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>integer</td>
+<td>num_mois</td>
+<td>De combien de mois est votre grossesse ?</td>
+<td>${grossesse}=“oui”</td>
+</tr>
+<tr class="odd">
+<td>select_one ouinon_list</td>
+<td>partenaire</td>
+<td>Vivez vous avec votre partenaire ?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Ici, la question sur les réseaux s’affiche quand il y a “oui” à la première question. Ensuite, la question du numéro vodacom ne s’affiche que si “vodacom” a été choisi dans la question sur les réseaux téléphoniques. Rémarquez la différence dans l’écriture du saut entre une question à réponse unique et à réponse multiple.</p>
+<table class="table">
+<caption>Saut (2) - feuile survey</caption>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+<th>relevant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>select_one ouinon_list</td>
+<td>tel</td>
+<td>Avez-vous un téléphone ?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>select_multiple reseau_list</td>
+<td>reseau</td>
+<td>Quels réseaux téléphoninques utilisez-vous ?</td>
+<td>${tel}=“oui”</td>
+</tr>
+<tr class="odd">
+<td>integer</td>
+<td>num_voda</td>
+<td>Quel est votre numéro vodacom ?</td>
+<td>selected(${reseau}, “vodacom”)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="contraintes" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="contraintes"><span class="header-section-number">6.3.2</span> Contraintes</h3>
+<p>Imposer une contrainte à une variable, c’est restreindre celle-ci à être égale à une valeure donnée ou un intervalle de valeurs. Lorsqu’il y a une contrainte sur une variable, la condition de cette contrainte doit être remplie pour pouvoir continuer le remplissage du formulaire. Dans l’exemple suivant par exemple, tant que la valeur saisie pour l’âge est inférieure à 18 ou supérieure à 99, on ne peut pas aller au champ suivant.</p>
+<table class="table">
+<caption>Contrainte - feuille survey</caption>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+<th>constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>integer</td>
+<td>age</td>
+<td>Quel est votre âge ?</td>
+<td>${age}&gt;=18 and ${age} &lt;=99</td>
+</tr>
+<tr class="even">
+<td>decimal</td>
+<td>poids</td>
+<td>Combien a pésé votre enfant à la dernière visite ?</td>
+<td>.&gt;=1 and .&lt;=10</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="groupe" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="groupe"><span class="header-section-number">6.4</span> Groupe</h2>
+<p>Permet de regrouper un ensemble de questions. Il sert à :</p>
+<ul>
+<li><p>afficher plusieurs questions sur le même écran</p></li>
+<li><p>appliquer un saut à un ensemeble de questions</p></li>
+</ul>
+<p>Le libellé du groupe est visible pour toutes les questions du groupe. Un groupe peut contenir un autre groupe</p>
+<p>Si nous voulons afficher plusieurs quesions sur le même écran, il suffit de mettre le mot <code>field-list</code> dans la cellule croisant la ligne de la déclaration du groupe et la colonne<code>appearance</code>. On définit le groupe avec les mots <code>begin_group</code> et <code>end_group</code> comme le montre la figure suivante :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/groupe.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">déclaration du groupe</figcaption><p></p>
+</figure>
+</div>
+<p>Les tableaux suivants donnent un exemple de l’utilisation de groupe.</p>
+<table class="table">
+<caption>groupe - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>begin_group</strong></td>
+<td>group_1</td>
+<td>Identification</td>
+</tr>
+<tr class="even">
+<td>select_one prov_list</td>
+<td>province</td>
+<td>Nom de la province</td>
+</tr>
+<tr class="odd">
+<td>select_one ville_list</td>
+<td>ville</td>
+<td>Nom de la ville</td>
+</tr>
+<tr class="even">
+<td>select_one comm_list</td>
+<td>commune</td>
+<td>Nom de la commune</td>
+</tr>
+<tr class="odd">
+<td><strong>end_group</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>En ajoutant <code>field-list</code>, on peut afficher ces trois questions sur le même écran.</p>
+<table class="table">
+<caption>groupe avec field-list</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+<th>appearance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>begin_group</strong></td>
+<td>group_1</td>
+<td>Identification</td>
+<td>field-list</td>
+</tr>
+<tr class="even">
+<td>select_one prov_list</td>
+<td>province</td>
+<td>Nom de la province</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>select_one ville_list</td>
+<td>ville</td>
+<td>Nom de la ville</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>select_one comm_list</td>
+<td>commune</td>
+<td>Nom de la commune</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>end_group</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="répétition" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="répétition"><span class="header-section-number">6.5</span> Répétition</h2>
+<p>Permet de répéter une ou plusieurs questions un certain nombre de fois. La répétition peut être utilisée lorsque vous voulez collecter les données sur plusieurs individus au sein d’une même unité statistiques et que le nombre de ces individus varie d’une unité à l’autre.</p>
+<p>Exemple :</p>
+<ul>
+<li><p>obtenir des informations sur chaque moustiquaire dans un ménage, le nombre de moustiquaires étant différent d’un ménage à l’autre.</p></li>
+<li><p>obtenir des informations sur les membres du ménage dans une enquête ménage.</p></li>
+</ul>
+<p>Le nombre de répétition peut être précisé sur la colonne <code>repeat_count</code>.</p>
+<p>On définit le groupe avec les mots <code>begin_repeat</code> et <code>end_repeat</code> comme le montre la figure suivante :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/repetition.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">déclaration de la répétition</figcaption><p></p>
+</figure>
+</div>
+<p>Les tableaux suivants montre comment la répétition peut être utilisée.</p>
+<table class="table">
+<caption>Répétition - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>begin_repeat</strong></td>
+<td>rep_1</td>
+<td>Membres du ménage</td>
+</tr>
+<tr class="even">
+<td>text</td>
+<td>nom</td>
+<td>Nom de la personne</td>
+</tr>
+<tr class="odd">
+<td>integer</td>
+<td>age</td>
+<td>Age de la personne</td>
+</tr>
+<tr class="even">
+<td>select_one sexe_list</td>
+<td>sexe</td>
+<td>Sexe de la personne</td>
+</tr>
+<tr class="odd">
+<td><strong>end_repeat</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Dans ce cas, au début de chaque répétition un message nous demandera si nous voulons ajouter une répétition. On met fin à la répétion en répondant non à ce message.</p>
+<p>Il est aussi possible de préciser à l’avance le nombre de fois que les questions de la répétition vont se répéter. Pour cela, on utilise le nom de la variable qui définit le nombre de répétition dans la cellule entre la ligne de la déclaration de la répétition et la colonne <code>repeat_count</code>. Le tableau suivant en montre un exemple.</p>
+<table class="table">
+<caption>répétition avec repeat_count - feuille survey</caption>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 17%">
+<col style="width: 28%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+<th>repeat_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>integer</td>
+<td>nb_personne</td>
+<td>Nombre de personnes</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>begin_repeat</strong></td>
+<td>rep_1</td>
+<td>Membres du ménage</td>
+<td>${nb_personne}</td>
+</tr>
+<tr class="odd">
+<td>text</td>
+<td>nom</td>
+<td>Nom de la personne</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>integer</td>
+<td>age</td>
+<td>Age de la personne</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>select_one sexe_list</td>
+<td>sexe</td>
+<td>Sexe de la personne</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>end_repeat</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Dans cet exemple, les trois dans la répétition vont se répétition selon la valeur saisie dans la variable <code>nb_personne</code>.</p>
+</section>
+<section id="sélection-en-cascade" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sélection-en-cascade"><span class="header-section-number">6.6</span> Sélection en cascade</h2>
+<p>La sélection consiste à faire plusieurs choix sur une liste imbriquée.</p>
+<p>Il peut s’agir de la sélection successive d’une province, ville, commune, quartier, etc. La sélection en cascade permet alors de filtrer les unités secondaires en fonction des choix précédents, affichant ainsi les villes de la province séléctionnée, les communes de la ville sélectionnée, les quartiers de la commune sélectionnée, etc.</p>
+<p>Avec XLSForm, on utilse la colonne ‘choice_filter’ sue la feuille <code>survey</code> pour effectuer le filtre. Sur la feuille <code>choices</code>, on ajoute une colonne dans laquelle les unités primaires en fonction des unités secondaires. Les choses pourront être plus claires avec un exemple.</p>
+<p>Dans cet exemple, nous filtrons les villes en fonction de la province et les communes en fonction de la ville.</p>
+<table class="table">
+<caption>sélection en cascade - feuille survey</caption>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type1</th>
+<th>name</th>
+<th>label</th>
+<th>choice_filter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>select_one prov_list</td>
+<td>province</td>
+<td>Nom de la province</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>select_one ville_list</td>
+<td>ville</td>
+<td>Nom de la ville</td>
+<td>filtre = ${province}</td>
+</tr>
+<tr class="odd">
+<td>select_one comm_list</td>
+<td>commune</td>
+<td>Nom de la commune</td>
+<td>filtre = ${ville}</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<caption>sélection en cascade - feuille choices</caption>
+<thead>
+<tr class="header">
+<th>list_name</th>
+<th>name</th>
+<th>label</th>
+<th>filtre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>prov_list</td>
+<td>10</td>
+<td>Kinshasa</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>prov_list</td>
+<td>20</td>
+<td>Haut-Katanga</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ville_list</td>
+<td>101</td>
+<td>Kinshasa</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>ville_list</td>
+<td>201</td>
+<td>Lubumbashi</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>comm_list</td>
+<td>1011</td>
+<td>Ngaliema</td>
+<td>101</td>
+</tr>
+<tr class="even">
+<td>comm_list</td>
+<td>2011</td>
+<td>Kamalondo</td>
+<td>201</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./conception-formulaire-p1.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./synchronisation-de-donnees.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

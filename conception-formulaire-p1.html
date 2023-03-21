@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Collecte de données mobile avec ODK - 5&nbsp; Conception du formulaire : partie 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./conception-formulaire-p2.html" rel="next">
+<link href="./odk-pour-la-collecte-de-donnees.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./images/logo-white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Collecte de données mobile avec ODK</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Avant propos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionnaire.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-base-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./odk-pour-la-collecte-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synchronisation-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projets.html" class="sidebar-item-text sidebar-link">Projets</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#conception-du-formulaire-avec-xlsform" id="toc-conception-du-formulaire-avec-xlsform" class="nav-link active" data-scroll-target="#conception-du-formulaire-avec-xlsform"> <span class="header-section-number">5.1</span> Conception du formulaire avec XLSForm</a></li>
+  <li><a href="#les-feuilles" id="toc-les-feuilles" class="nav-link" data-scroll-target="#les-feuilles"> <span class="header-section-number">5.2</span> Les feuilles</a>
+  <ul class="collapse">
+  <li><a href="#survey" id="toc-survey" class="nav-link" data-scroll-target="#survey"> <span class="header-section-number">5.2.1</span> survey</a></li>
+  <li><a href="#choices" id="toc-choices" class="nav-link" data-scroll-target="#choices"> <span class="header-section-number">5.2.2</span> choices</a></li>
+  <li><a href="#settings" id="toc-settings" class="nav-link" data-scroll-target="#settings"> <span class="header-section-number">5.2.3</span> settings</a></li>
+  </ul></li>
+  <li><a href="#type-de-variables-xlsform" id="toc-type-de-variables-xlsform" class="nav-link" data-scroll-target="#type-de-variables-xlsform"> <span class="header-section-number">5.3</span> Type de variables XLSForm</a></li>
+  <li><a href="#les-metadonnées" id="toc-les-metadonnées" class="nav-link" data-scroll-target="#les-metadonnées"> <span class="header-section-number">5.4</span> Les metadonnées</a></li>
+  <li><a href="#déployer-un-formulaire-en-local" id="toc-déployer-un-formulaire-en-local" class="nav-link" data-scroll-target="#déployer-un-formulaire-en-local"> <span class="header-section-number">5.5</span> Déployer un formulaire en local</a>
+  <ul class="collapse">
+  <li><a href="#convertir-le-fichier-xlsform-en-xforms" id="toc-convertir-le-fichier-xlsform-en-xforms" class="nav-link" data-scroll-target="#convertir-le-fichier-xlsform-en-xforms"> <span class="header-section-number">5.5.1</span> Convertir le fichier XLSForm en Xforms</a></li>
+  <li><a href="#répertoire-odk" id="toc-répertoire-odk" class="nav-link" data-scroll-target="#répertoire-odk"> <span class="header-section-number">5.5.2</span> Répertoire ODK</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="conception-du-formulaire-avec-xlsform" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="conception-du-formulaire-avec-xlsform"><span class="header-section-number">5.1</span> Conception du formulaire avec XLSForm</h2>
+<p>Dans ce chapitre, nous allons voir comment créer des formulaires en utilisant XLSForm avec Excel ou Google Sheet. ODK Build peut également être utilisé pour concevoir des formulaires, mais XLSForm présente beaucoup d’avantages tels que décrits ci-après :</p>
+<ul>
+<li><p>Flexibilité : XLSForm permet une grande flexibilité dans la création des formulaires. En utilisant un tableur familier comme MS Excel ou Google Sheets, les utilisateurs peuvent rapidement et facilement créer des formulaires ODK complexes en y ajoutant des fonctionnalités avancées telles que des calculs, des conditions, des listes de choix et des contraintes.</p></li>
+<li><p>Contrôle : En utilisant XLSForm, les utilisateurs ont un contrôle complet sur la conception du formulaire et peuvent personnaliser chaque aspect du formulaire afin qu’il réponde exactement à leurs besoins spécifiques.</p></li>
+<li><p>Rapidité : Avec XLSForm, la création de formulaires est rapide. Les utilisateurs peuvent facilement copier et coller les contenus et les paramètres à travers le tableur, ce qui signifie que vous pouvez rapidement construire des formulaires complexes et les déployer rapidement.</p></li>
+</ul>
+</section>
+<section id="les-feuilles" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="les-feuilles"><span class="header-section-number">5.2</span> Les feuilles</h2>
+<p>La création du formulaire commence par la création d’un classeur. Une fois le classeur créé, il faut y ajouter trois feuilles. Les trois feuilles doivent être nommées respectivement <code>survey</code>, <code>choices</code> et <code>settings</code> comme le montre la figure suivante.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/feuilles.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Classeur Excel avec trois feuilles</figcaption><p></p>
+</figure>
+</div>
+<section id="survey" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="survey"><span class="header-section-number">5.2.1</span> survey</h3>
+<p>Cette feuille de calcul donne à votre formulaire sa structure globale et contient la majeure partie du contenu du formulaire. Il contient la liste complète des questions et des informations sur la façon dont elles doivent apparaître dans le formulaire. Chaque ligne représente généralement une question.</p>
+<p>Cette feuille comporte 3 colonnes obligatoires : <code>type</code>, <code>name</code> et <code>label</code>.</p>
+<ul>
+<li><p><code>type</code> : spécifie le type de variable que vous attendez pour la question.</p></li>
+<li><p><code>name</code> : spécifie le nom de variable unique pour cette entrée. Deux entrées ne peuvent pas avoir le même nom. Les noms doivent commencer par une lettre ou un trait de soulignement. Les noms ne peuvent contenir que des lettres, des chiffres, des traits d’union, des traits de soulignement et des points. Les noms sont sensibles à la casse.</p></li>
+<li><p><code>label</code> : contient le texte de la question qui s’affiche dans le formulaire.</p></li>
+</ul>
+</section>
+<section id="choices" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="choices"><span class="header-section-number">5.2.2</span> choices</h3>
+<p>Cette feuille de calcul est utilisée pour spécifier les catégories de réponse pour les questions à réponse unique et multiple. Chaque ligne représente une catégorie de réponse. Les catégories de réponse avec le même nom de liste (list_name) sont considérés comme faisant partie d’un ensemble de choix connexe et apparaîtront ensemble pour une question. Cela permet également de réutiliser un ensemble de choix pour plusieurs questions (par exemple, des questions oui/non).</p>
+<p>Cette feuille comporte également 3 colonnes obligatoires : <code>list_name</code>, <code>name</code> et <code>label</code>.</p>
+<ul>
+<li><p><code>list_name</code> : permet de regrouper un ensemble de catégorie de réponses liées, c’est-à-dire des catégories de réponses qui doivent apparaître ensemble sous une question,</p></li>
+<li><p><code>name</code> : spécifie le code unique associé à chaque catégorie de réponse,</p></li>
+<li><p><code>label</code> : affiche le choix de réponse exactement tel que vous souhaitez qu’il apparaisse sur le formulaire.</p></li>
+</ul>
+</section>
+<section id="settings" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="settings"><span class="header-section-number">5.2.3</span> settings</h3>
+<p>C’est la feuille de paramètres qui permettent d’identifier de manière unique le formulaire et sa version actuelle. Nous recommandons de spécifier au moins les colonnes suivantes :</p>
+<ul>
+<li><p><code>form_title</code> : Le titre qui sera affiché par les outils qui listent ce formulaire,</p></li>
+<li><p><code>form_id</code> : ID unique qui identifie ce formulaire pour les outils qui l’utilisent. Ce n’est peut-être pas contenir des espaces et doit commencer par une lettre ou un trait de soulignement. Utilisez un texte court et descriptif. Par exemple : enq_cond_vie.</p></li>
+<li><p><code>version</code> : Le code de version unique qui identifie l’état actuel du formulaire. La convention courante consiste à utiliser un format tel que aaaammjjrr. Par exemple, 2023031501 est la 1ère révision du 15 mars 2023.</p></li>
+<li><p><code>instance_name</code> : une expression qui sera utilisée pour représenter un formulaire rempli spécifique. Elle est composée des valeurs saisies dans le formulaire.</p></li>
+</ul>
+</section>
+</section>
+<section id="type-de-variables-xlsform" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="type-de-variables-xlsform"><span class="header-section-number">5.3</span> Type de variables XLSForm</h2>
+<p>XLSForm prend en charge un certain nombre de types de variables. Le type de variable permet d’indiquer la nature de la donnée que vous désirez collecter. Il peut s’agir d’une valeur numérique, du texte, d’une photo, d’une sig,ature, des coordonnées géographiques, etc. Ci-après nous verons les différents types de variables que vous pouvez entrer dans la colonne <code>type</code> de la feuille de calcul de <code>survey</code> de votre XLSForm :</p>
+<ul>
+<li><strong>note</strong></li>
+</ul>
+<p>Permet de définir un texte libre à l’écran.</p>
+<p>Peut être utilisé pour définir un titre ou une section.</p>
+<table class="table">
+<caption>type note - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>note</td>
+<td>intro</td>
+<td>QUESTIONNAIRE SUR LES CONDITIONS DE VIE DE MENAGES</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_1.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type note</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>integer/decimal</strong></li>
+</ul>
+<p>Type permettant de collecter une valeur entière/décimale.</p>
+<table class="table">
+<caption>types integer et decimal - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>integer</td>
+<td>age</td>
+<td>Quel est votre âge ?</td>
+</tr>
+<tr class="even">
+<td>decimal</td>
+<td>poids</td>
+<td>Quel est le poids de votre enfant ?</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_2.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">types integer et decimal</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>text</strong></li>
+</ul>
+<p>Permet de collecter des données alphanumériques</p>
+<table class="table">
+<caption>type text - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>text</td>
+<td>nom_cm</td>
+<td>Quel est le nom du chef de ménage ?</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_3.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type text</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>date</strong></li>
+</ul>
+<p>Permet de collecter la date. Si nous avons besoin de nous limiter seulement au mois et à l’année, nous pouvons utiliser <code>month-year</code>. <code>year</code> permet de ne collecter que l’année. Pour l’heure, nous pouvons uliliser <code>time</code> et <code>dateTime</code> combine la date et l’heure.</p>
+<table class="table">
+<caption>type date - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>date</td>
+<td>date</td>
+<td>Quelle est la date du prochain rendez-vous ?</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_4.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type date</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>range</strong></li>
+</ul>
+<p>Permet de collecter une valeur numérique sur un glisseur. On peut préciser le minimum, le maximum et le pas dans la colonne `parameters` (start; end; step).</p>
+<table class="table">
+<caption>type range - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>range</td>
+<td>cote</td>
+<td>Quelle note attribuez-vous à ce service ?</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_5.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type range</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>rank</strong></li>
+</ul>
+<p>Permet de collecter une liste de valeurs ordonnées à partir d’une liste fournie. Cela donne la possibilité de classer des éléments selon un ordre donné.</p>
+<table class="table">
+<caption>type rank - feuille survey</caption>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 12%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rank service_list</td>
+<td>service</td>
+<td>Classez ces éléménts selon vos priorités</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_6.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type rank</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>select_one</strong></li>
+</ul>
+<p>Permet de collecter une valeur unique à partir d’une liste.</p>
+<table class="table">
+<caption>type select_one - feuille survey</caption>
+<colgroup>
+<col style="width: 32%">
+<col style="width: 20%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>select_one etude_list</td>
+<td>niveau_etude</td>
+<td>Quel est votre niveau d’étude ?</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_7.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type select_one</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>select_multiple</strong></li>
+</ul>
+<p>Permet de collecter plusieurs valeurs (réponses) à partir d’une liste.</p>
+<table class="table">
+<caption>type select_multiple - feuille survey</caption>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 26%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>select_multiple reseau_list</td>
+<td>reseau</td>
+<td>Quels réseaux téléphoniques utilisez-vous ?</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_8.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type select_multiple</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>geopoint</strong></li>
+</ul>
+<p>Permet de collecter les coordonnées géographiques : latitude, longitude, altitude et la précision.</p>
+<table class="table">
+<caption>type geopoint - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>geopoint</td>
+<td>gps</td>
+<td>Collectez les coordonnées géographiques</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_9.png" width="200" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">type geopoint</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>barcode</strong></li>
+</ul>
+<p>Permet de collecter les données contenues dans un QR code</p>
+<table class="table">
+<caption>type barcode - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>barcode</td>
+<td>qr_code</td>
+<td>Scannez le QR code</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_10.png" alt="type barcode" width="200" height="400" class="figure-img"></p>
+</figure>
+</div>
+<ul>
+<li><strong>image</strong></li>
+</ul>
+<p>Permet de prendre une photo. Nous pouvons collecter une signature en mettant le mot signature sur la colonne appearance.</p>
+<p>Il y a aussi les types <code>audio</code>et <code>video</code> qui permettent, comme leurs noms indiquent, de collecter un audio et une video.</p>
+<table class="table">
+<caption>type image - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>image</td>
+<td>photo_menage</td>
+<td>Capturez la photo du ménage</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/screen_11.png" class="img-fluid figure-img" width="187"></p>
+<p></p><figcaption class="figure-caption">type image</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>calculate</strong></li>
+</ul>
+<p>Permet d’effectuer un calcul. L’opération à effectuer doit être écrit dans la cellule entre la ligne <code>calulate</code> et la colonne <code>calculation</code>. La division peut être réalisée avec div.</p>
+<table class="table">
+<caption>type calculate - feuille survey</caption>
+<thead>
+<tr class="header">
+<th>type</th>
+<th>name</th>
+<th>calculation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>calculate</td>
+<td>somme_enfants</td>
+<td>${nb_fille}+${nb_garcon}</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="les-metadonnées" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="les-metadonnées"><span class="header-section-number">5.4</span> Les metadonnées</h2>
+<p>Ce sont des données collectées automatiquement en arrière-plan durant l’administration du formulaire. Pour les collecter, il suffit d’inclure ces diffénts mots dans la colonne <code>type</code> de la feuille <code>survey</code></p>
+<ul>
+<li>start : date et heure du début de l’interview</li>
+<li>end : date et heure de la fin de l’interview</li>
+<li>today : date de la fin de l’interview</li>
+<li>deviceid : identifiant du téléphone</li>
+<li>username : le nom de l’utilisateur</li>
+<li>phonenumber : le numéro du téléphone</li>
+</ul>
+<p>Notons <code>username</code> <code>phonenumber</code> doivent être préalablement founis par l’ulisateur dans les paramétres de l’application.</p>
+<p>Pour ajouter les modalités aux variables, nous utilisons la feuille <code>choices</code>. Un exemple est donné ci-après :</p>
+<table class="table">
+<caption>modalités sur la feuille choices</caption>
+<thead>
+<tr class="header">
+<th>list_name</th>
+<th>name</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>etude_list</td>
+<td>1</td>
+<td>Aucun niveau</td>
+</tr>
+<tr class="even">
+<td>etude_list</td>
+<td>2</td>
+<td>Primaire</td>
+</tr>
+<tr class="odd">
+<td>etude_list</td>
+<td>3</td>
+<td>Secondaire</td>
+</tr>
+<tr class="even">
+<td>etude_list</td>
+<td>4</td>
+<td>Supérieur</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>reseau_list</td>
+<td>Airtel</td>
+<td>Airtel</td>
+</tr>
+<tr class="odd">
+<td>reseau_list</td>
+<td>Vodacom</td>
+<td>Vodacom</td>
+</tr>
+<tr class="even">
+<td>reseau_list</td>
+<td>Orange</td>
+<td>Orange</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="déployer-un-formulaire-en-local" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="déployer-un-formulaire-en-local"><span class="header-section-number">5.5</span> Déployer un formulaire en local</h2>
+<p>Le déploiement du formulaire en local consiste à convertir le formulaire XLSForm (.xls ou.xlsx) en fichier Xforms (.xml) et à le placer dans le répertoire ODK Collect sur le smartphone. En effet, le fichier XLSForm n’est pas lisible dans l’application ODK Collect. Pour que cette dernière reconnaisse le formulaire, il doit être converti en fichier Xforms grâce à l’application ODK XLSForm offline.</p>
+<section id="convertir-le-fichier-xlsform-en-xforms" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="convertir-le-fichier-xlsform-en-xforms"><span class="header-section-number">5.5.1</span> Convertir le fichier XLSForm en Xforms</h3>
+<p>Nous utilisons ODK XLSForm offline pour cette conversion. En voici les étapes :</p>
+<ul>
+<li><p>Sous <em>Choose XLSForm (.xls or .xlsx) for conversion</em>, cliquez sur <em>Choose file…</em> pour choisir le fichier XLSForm à convertir,</p></li>
+<li><p>Sous <em>Choose location for output file(s)</em>, cliquez sur <em>Choose location</em> pour choisir l’emplacement du fichier de sortie (Xforms). Par défaut, ce fichier sera dans le même emplacement que le fichier XLSForm.</p></li>
+<li><p>Sous <em>Set conversion options</em>, vous pouvez demander d’écraser le fichier résultat précédemment converti en cochant <em>Overwrite existing output file(s)</em>. Vous pouvez aussi demander de valider le fichier Xforms avec ODK Validate.</p></li>
+<li><p>Cliquez sur le bouton Run pour lancer la conversion.</p></li>
+</ul>
+<p>Dans la partie inférieure de l’application, un message s’affiche pour signaler que le fichier Xforms(.xml) a été créé ou liste des erreurs rencontrées dans le formulaire lors de la tentative de conversion.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/xlsform-offline.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ODK XLSForm offline</figcaption><p></p>
+</figure>
+</div>
+<p>Une fois le fichier généré, nous pouvons le placé dans notre smartphone pour le tester.</p>
+</section>
+<section id="répertoire-odk" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="répertoire-odk"><span class="header-section-number">5.5.2</span> Répertoire ODK</h3>
+<p>Pour exécuter le formulaire converti, il suffit de le mettre dans le répertoire ODK. L’emplacement approprié est :</p>
+<p><strong>Android/data/org.odk.collect.android/files/projects/nom_du_projet/</strong></p>
+<p>Dans ce repartoire, nous trouvons un certain nombre de sous-dossiers dont deux nous interesse particulièrement. Il s’agit de <code>forms</code> et <code>instances</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/odk-forder.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Répertoire DK</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>forms : contient les formulaires</p></li>
+<li><p>instances : contient les données collectées. Dans instances, chaque sous-dossier correspond à un enregistrement.</p></li>
+</ul>
+<p>Placez votre formulaire dans le sous-dossier <code>forms</code>. Vous pouvez maintenant tester votre formulaire avec ODK Collect.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./odk-pour-la-collecte-de-donnees.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./conception-formulaire-p2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Collecte de données mobile avec ODK - 7&nbsp; Synchronisation de données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./projets.html" rel="next">
+<link href="./conception-formulaire-p2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./images/logo-white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Collecte de données mobile avec ODK</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Avant propos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionnaire.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-base-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./odk-pour-la-collecte-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synchronisation-de-donnees.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projets.html" class="sidebar-item-text sidebar-link">Projets</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#serveurs" id="toc-serveurs" class="nav-link active" data-scroll-target="#serveurs"> <span class="header-section-number">7.1</span> Serveurs</a>
+  <ul class="collapse">
+  <li><a href="#kobotoolbox" id="toc-kobotoolbox" class="nav-link" data-scroll-target="#kobotoolbox"> <span class="header-section-number">7.1.1</span> KoboToolBox</a></li>
+  <li><a href="#odk-aggregate" id="toc-odk-aggregate" class="nav-link" data-scroll-target="#odk-aggregate"> <span class="header-section-number">7.1.2</span> ODK Aggregate</a></li>
+  </ul></li>
+  <li><a href="#paramétrage-du-téléphone" id="toc-paramétrage-du-téléphone" class="nav-link" data-scroll-target="#paramétrage-du-téléphone"> <span class="header-section-number">7.2</span> Paramétrage du téléphone</a>
+  <ul class="collapse">
+  <li><a href="#lien-avec-le-serveur" id="toc-lien-avec-le-serveur" class="nav-link" data-scroll-target="#lien-avec-le-serveur"> <span class="header-section-number">7.2.1</span> Lien avec le serveur</a></li>
+  <li><a href="#télécharger-un-formulaire-vièrge" id="toc-télécharger-un-formulaire-vièrge" class="nav-link" data-scroll-target="#télécharger-un-formulaire-vièrge"> <span class="header-section-number">7.2.2</span> Télécharger un formulaire vièrge</a></li>
+  <li><a href="#remplir-un-formulaire-vièrge" id="toc-remplir-un-formulaire-vièrge" class="nav-link" data-scroll-target="#remplir-un-formulaire-vièrge"> <span class="header-section-number">7.2.3</span> Remplir un formulaire vièrge</a></li>
+  <li><a href="#editer-un-formulaire" id="toc-editer-un-formulaire" class="nav-link" data-scroll-target="#editer-un-formulaire"> <span class="header-section-number">7.2.4</span> Editer un formulaire</a></li>
+  <li><a href="#envoyer-les-données-au-serveur" id="toc-envoyer-les-données-au-serveur" class="nav-link" data-scroll-target="#envoyer-les-données-au-serveur"> <span class="header-section-number">7.2.5</span> Envoyer les données au serveur</a></li>
+  <li><a href="#supprimer-un-formulaire" id="toc-supprimer-un-formulaire" class="nav-link" data-scroll-target="#supprimer-un-formulaire"> <span class="header-section-number">7.2.6</span> Supprimer un formulaire</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>La synchronisation de données dans le cadre de la collecte de données mobile est l’opération consistant à envoyer les données collectées des smartphones vers un serveur, le plus souvent en ligne. Pour cela, il faut dont qu’il y ait d’un côté un serveur pour héberger les formulaires vièrges que les enquêteurs pourront télécharger et les données que ces agents porront collecter. De l’autre côté, il faut paramétrer les téléphones pour que ceux-ci communiquent avec ce serveur.</p>
+<p>Nous verrons donc comment mettre en place un serveur et comment paramétrer les appareils mobiles android.</p>
+<section id="serveurs" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="serveurs"><span class="header-section-number">7.1</span> Serveurs</h2>
+<p>Un serveur peut se définir comme étant un espace (en ligne) de stockage de données de différents types.</p>
+<p>L’hébergement des données de ODK collect peut se faire avec les serveurs comme ODK Central, ODK aggregate, KoboToolBox et autres. Dans cette formation, nous verrons comment utiliser les serveurs KoboToolBox et ODK aggregate.</p>
+<section id="kobotoolbox" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="kobotoolbox"><span class="header-section-number">7.1.1</span> KoboToolBox</h3>
+<p>Le serveur de KoboToolBox est initialement utilisé pour gérer les données collectées avec l’application Kobo Collect. Mais étant donné que Kobo Collect est basée sur le code source de ODK Collect et que les deux applications utilisent le standared XLSForm, nous pouvons donc utiliser KoboToolBox pour héberger les données collectées avec ODK collect.</p>
+<section id="créer-un-compte-dans-kobotoolbox" class="level4" data-number="7.1.1.1">
+<h4 data-number="7.1.1.1" class="anchored" data-anchor-id="créer-un-compte-dans-kobotoolbox"><span class="header-section-number">7.1.1.1</span> Créer un compte dans KoboToolBox</h4>
+<p>La création d’un serveur dans KoboToolBox consiste à créer un compte et à y importer des formulaires. Cela se fait sur <a href="https://kobo.humanitarianresponse.info/" class="uri">https://kobo.humanitarianresponse.info/</a>. comme le montre la figure suivante :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/create-account.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">création du compte koboToolbox</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="importer-un-formulaire" class="level4" data-number="7.1.1.2">
+<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="importer-un-formulaire"><span class="header-section-number">7.1.1.2</span> Importer un formulaire</h4>
+<p>Une fois dans l’interface utilisateur de KoboToolbox, vous pouvez importer votre formulaire <strong>XLSForm</strong> dans le serveur.</p>
+<p>Pour cela, il suffit de cliquer sur le bouton “<strong>Nouveau</strong>” se trouvant au coin supérieur gauche comme le montre la figure suivante :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/import-form-1.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">importer un nouveau formulaire</figcaption><p></p>
+</figure>
+</div>
+<p>Cela affiche la boîte de dialogue “<strong>Créer le projet: Choose a source</strong>”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/import-form-2.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">importer un nouveau formulaire - 2</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>cliquez sur “<strong>Upload an XLSForm</strong>” pour aller chercher le fichier XLSFom qui se trouve sur votre ordinateur.</p></li>
+<li><p>sélectionnez le fichier, cliquer sur OK pour l’importer</p></li>
+</ul>
+<p>Dans la boîte de dialogue “Créer le projet: Détails du projet”, précisez le titre du projet, une description(facultative), votre secteur et votre pays.</p>
+<ul>
+<li>cliquer sur le bouton “<strong>CREER LE PROJET</strong>”</li>
+</ul>
+<p>VOTRE PROJET EST MAINTENANT DANS LE SERVEUR!</p>
+</section>
+<section id="déployer-un-formulaire" class="level4" data-number="7.1.1.3">
+<h4 data-number="7.1.1.3" class="anchored" data-anchor-id="déployer-un-formulaire"><span class="header-section-number">7.1.1.3</span> Déployer un formulaire</h4>
+<p>Il ne suffit pas d’importer un projet dans le serveur pour qu’il soit utilisable pour la collecte de données. Jusque là, notre formulaire est dans le serveur mais nous ne pouvons pas l’utiliser pour la collecte de données car il n’est pas encore déployé.</p>
+<p>Pour déployer un fomulaire, il suffit de cliquer sur le bouton “<strong>DEPLOYER</strong>” comme le montre la figure suivante :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/deploy-form.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">déployer un formulaire</figcaption><p></p>
+</figure>
+</div>
+<p>Dans la partie “<strong>Collection de données</strong>”, nous avons différentes options en cliquant sur le ménu déroulant. Une explication pour chaque option est donnée ci-après :</p>
+<ul>
+<li><p><strong>Online-Offline (soumissions multiples)</strong> : Ceci permet des soumissions en ligne et hors ligne et constitue la meilleure option pour collecter des données sur le terrain.</p></li>
+<li><p><strong>En ligne seulement (soumissions multiples)</strong> : C’est la meilleure option lorsque vous entrez plusieurs enregistrements à la fois sur un ordinateur, par exemple, pour la transcription des dossiers papier.</p></li>
+<li><p><strong>En ligne seulement (une soumission)</strong> : Il permet une soumission unique et peut être associé au paramètre « return_url » pour rediriger l’utilisateur vers une URL de votre choix après la soumission du formulaire.</p></li>
+<li><p><strong>En ligne uniquement (une soumission autorisée par répondant)</strong> : Ceci permet à votre formulaire Web d’être soumis une seule fois par utilisateur, en utilisant une protection de base pour empêcher le même utilisateur (sur le même navigateur et appareil) de soumettre plus d’une fois.</p></li>
+<li><p><strong>Code de formulaire Web</strong> : Utilisez cet extrait de code html5 pour intégrer votre formulaire sur votre propre site web en utilisant des marges plus petites.</p></li>
+<li><p><strong>Aperçu seulement</strong> : Utilisez cette version pour tester et obtenir un retour d’information. Ne permet pas de soumettre des données.</p></li>
+<li><p><strong>Application Android</strong> : permet de collecter les données avec des smartphones Android</p></li>
+</ul>
+</section>
+<section id="gestion-de-données" class="level4" data-number="7.1.1.4">
+<h4 data-number="7.1.1.4" class="anchored" data-anchor-id="gestion-de-données"><span class="header-section-number">7.1.1.4</span> Gestion de données</h4>
+<p>Ici, nous voyons quelques fénêtres qui permet d’avoir une idée sur votre collecte d données sur le terrain. Il s’agira de voir comment afficher le tableau de données, le rapport de données, les différents médias, la distribution spatiale des enquêtes sur la carte et le téléchaement des données.</p>
+</section>
+<section id="a.-afficher-le-tableau-de-données" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="a.-afficher-le-tableau-de-données">A. Afficher le tableau de données</h4>
+<p>Pour afficher les données collectées dans un tableau où les lignes représentent les individus (enquêtes réalisées) et les colonnes les variables, procédez comme suit :</p>
+<ul>
+<li><p>Cliquez sur “DONNEES” dans la barre supérieure,</p></li>
+<li><p>Dans le panneau gauche, cliquez sur “<strong>Tableau</strong>”</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/data-table.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Tableau de données</figcaption><p></p>
+</figure>
+</div>
+<p>Ici, il est possible de masquer des champs, filtrer, trier, figer, modifier ou supprimer les données.</p>
+<p>Pour modifier ou supprmer une donnée, il suffit de la sélectionner en cochant la case de la ligne correspondante et cliquez sur “<strong>Modifier</strong>” ou “<strong>Supprimer</strong>” qui s’affiche au dessus du tableau de données.</p>
+<p>L’opération de suppression de données est irrevestible. Cela veut dire que les données supprimées ne peuvent plus être récupérées.</p>
+</section>
+<section id="b.-afficher-le-rapport-de-données" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="b.-afficher-le-rapport-de-données">B. Afficher le rapport de données</h4>
+<p>Par défaut, KoboToolBox crée un rapport automatique sur les données collectées. Sous forme graphique et tabulaire, les données de chaque variable sont affichées. Ce rapport peut être personnalisé en modifiant le type du graphique, la variable de groupement et les couleurs. Il est aussi possible d’imprimer ce rapport.</p>
+<p>A partir de la fénêtre de données, cliquez sur “<strong>Rapports</strong>”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/report.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">rapport de données</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="c.-accéder-aux-médias" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="c.-accéder-aux-médias">C. Accéder aux médias</h4>
+<p>Lorsque vous collectez des données multimédias telles que des photos, des signatures ou des vidéos, vous pouvez retrouver tous ces fichiers en clanquant sur “<strong>Galerie photo</strong>” dans le panneau gauche comme sur la figure suivante :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/medias.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">galerie photo</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="d.-afficher-les-données-sur-la-carte" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="d.-afficher-les-données-sur-la-carte">D. Afficher les données sur la carte</h4>
+<p>Lorsque le formulaire de collecte de données inclue la collecte de données géographiques, KoboToolBox crée par défaut une carte intéractive permettant de visualiser les unités enquêtées.</p>
+<p>On peut accéder à la carte en cliquant sur “Carte” à partir du panneau gauche comme sur la figure suivante :</p>
+<p>Quelques boutons sur la carte permettent de modifier l’affichage des points sur la carte.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/map.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">distrubution spatiale des unités</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="e.-exporter-les-données" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="e.-exporter-les-données">E. Exporter les données</h4>
+<p>KoboToolBox permet d’exporter les données vers divers formats tels que SPSS, Excel et CSV.</p>
+<p>L’exportation de données se fait comme suit :</p>
+<p>Après avoir cliqué sur “<strong>Téléchargements</strong>” dans le panneau gauche,</p>
+<ul>
+<li><p>sélectionnez le format de sortie sous “<strong>Sélectionner le type d’exportation</strong>”</p></li>
+<li><p>sélection le format de valeur et entête.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/export.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">exporter les données</figcaption><p></p>
+</figure>
+</div>
+<p>Avec <em>Etiquettes</em>, vous exportez les labels. Les entêtes de colonnes seront les différentes questions et les valeurs proviendront de la colonne <code>label</code>.</p>
+<p><em>Avec Valeurs et entête XML</em>, les names. Les entêtes de colonnes seront les noms de variables (<code>name</code>) et les valeurs proviendront de la colonne <code>name</code> de la feuille <code>choices</code>.</p>
+<ul>
+<li><p>Une fois ces options précisées, cliquez sur “<strong>EXPORTER</strong>”. Cela active un bouton pour le téléchargement des données.</p></li>
+<li><p>Cliquez enfin sur <strong>télécharger</strong>.</p></li>
+</ul>
+<p>Vous pouvez aussi exporter les fichiers multimédias en sélectionnant “<strong>Fichier média (ZIP)</strong>” sous “<strong>Sélectionner le type d’exportation</strong>”.</p>
+</section>
+</section>
+<section id="odk-aggregate" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="odk-aggregate"><span class="header-section-number">7.1.2</span> ODK Aggregate</h3>
+<p>En cours d’écriture…</p>
+</section>
+</section>
+<section id="paramétrage-du-téléphone" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="paramétrage-du-téléphone"><span class="header-section-number">7.2</span> Paramétrage du téléphone</h2>
+<p>Dans cette partie, nous allons voir comment paramétrer le téléphone pour qu’il se connecte au serveur. Cela pour :</p>
+<ul>
+<li><p>télécharger le formulaire vièrge logé adns le serveur,</p></li>
+<li><p>envoyer les données collectées sur terrain au serveur.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tel-serveur.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">connecter le téléphone au serveur</figcaption><p></p>
+</figure>
+</div>
+<section id="lien-avec-le-serveur" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="lien-avec-le-serveur"><span class="header-section-number">7.2.1</span> Lien avec le serveur</h3>
+<p>Pour toutes données collectées avec KoboToolBox, le lien du serveur est le même. Seul le nom d’utilisateur et le mot de passe diffèrent.</p>
+<p>Pour établir le line entre le téléphone et le serveur,</p>
+<p>Si c’est la première fois que vous utilisez ODK Collect, vous aurez un écran semblable à celui de la figure suivante :</p>
+<ul>
+<li><p>cliquez sur “Saisir les détails du projet”</p></li>
+<li><p>saisissez le lien du serveur comme suit : https://kc.humanitarianresponse.info/nom_utilisateur. Prière de remplacer “nom_utilisateur” par votre nom d’utilisateur du compte KoboToolBox.</p></li>
+</ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/connect.png" class="img-fluid figure-img" width="200"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/connect-2.png" class="img-fluid figure-img" width="200"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>paramétrage du téléphone</p>
+</div>
+</div>
+</div>
+<ul>
+<li>cliquez sur “Apliquer”</li>
+</ul>
+<p>Si ODK collect contient déjà d’autres projets,</p>
+<ul>
+<li><p>cliquez sur l’icone bleu au coin supérieur droit à partir de l’écran d’accueil de ODK Collect,</p></li>
+<li><p>cliquez sur paramètres dans le menu contextuel</p></li>
+</ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/connect-old.png" class="img-fluid figure-img" width="200"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/connect-old-2.png" class="img-fluid figure-img" width="200"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>paramétrage du téléphone</p>
+</div>
+</div>
+</div>
+<ul>
+<li><p>sur la liste des options, cliquez sur “Serveur”</p></li>
+<li><p>cliquez sur URL et tapez : https://kc.humanitarianresponse.info/nom_utilisateur. Prière de remplacer “nom_utilisateur” par votre nom d’utilisateur du compte KoboToolBox.</p></li>
+<li><p>cliquez sur “OK”.</p></li>
+</ul>
+</section>
+<section id="télécharger-un-formulaire-vièrge" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="télécharger-un-formulaire-vièrge"><span class="header-section-number">7.2.2</span> Télécharger un formulaire vièrge</h3>
+<p>A partir du menu principal,</p>
+<ul>
+<li><p>cliquer sur “Télécharger un formulaire vierge”</p></li>
+<li><p>une fois les formulaires affichés, sélectionnez celui que vous voulez et cliquez sur “Télécharger la sélection”.</p></li>
+</ul>
+</section>
+<section id="remplir-un-formulaire-vièrge" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="remplir-un-formulaire-vièrge"><span class="header-section-number">7.2.3</span> Remplir un formulaire vièrge</h3>
+<p>A partir du menu principal,</p>
+<ul>
+<li><p>cliquez sur “Remplir un formulaire”</p></li>
+<li><p>cliquez sur le formulaire à partir de la liste affichée</p></li>
+</ul>
+</section>
+<section id="editer-un-formulaire" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="editer-un-formulaire"><span class="header-section-number">7.2.4</span> Editer un formulaire</h3>
+<p>A partir du menu principal,</p>
+<ul>
+<li><p>cliquez sur “Editer un formulaire”</p></li>
+<li><p>A partir de la liste de tous les formulaires enregistrés, sélectionnez un puis éditez. Enregistrez à la fin pour sauvegarder les modifications.</p></li>
+</ul>
+</section>
+<section id="envoyer-les-données-au-serveur" class="level3" data-number="7.2.5">
+<h3 data-number="7.2.5" class="anchored" data-anchor-id="envoyer-les-données-au-serveur"><span class="header-section-number">7.2.5</span> Envoyer les données au serveur</h3>
+<p>A partir du menu principal,</p>
+<ul>
+<li><p>cliquez sur “Envoyer un formulaire finalisée”,</p></li>
+<li><p>à partir de la liste de tous les formulaires finalisés, sélectionnez puis envoyez.</p></li>
+</ul>
+</section>
+<section id="supprimer-un-formulaire" class="level3" data-number="7.2.6">
+<h3 data-number="7.2.6" class="anchored" data-anchor-id="supprimer-un-formulaire"><span class="header-section-number">7.2.6</span> Supprimer un formulaire</h3>
+<p>A partir du menu principal,</p>
+<ul>
+<li>cliquez sur “Supprimer formulaire enregistré”,</li>
+<li>sur la liste affichée, sélectionnez les formulaires à supprimer et cliquez sur “supprimer la sélection”</li>
+</ul>
+<p>“Formulaires enregistrés” permet de supprimer des formulaires remplis et “Formulaires vierges” pour des formulaires non remplis.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./conception-formulaire-p2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./projets.html" class="pagination-link">
+        <span class="nav-page-text">Projets</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

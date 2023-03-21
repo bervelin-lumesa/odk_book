@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="FDTK">
+<meta name="dcterms.date" content="2024-01-03">
+
+<title>Collecte de données mobile avec ODK</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./intro.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Collecte de données mobile avec ODK</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./images/logo-white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Collecte de données mobile avec ODK</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">Avant propos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionnaire.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Questionnaires</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro-base-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction aux bases de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./odk-pour-la-collecte-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ODK, suite d’outils de collecte de données mobile</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./conception-formulaire-p2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conception du formulaire : partie 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./synchronisation-de-donnees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Synchronisation de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projets.html" class="sidebar-item-text sidebar-link">Projets</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#avant-propos" id="toc-avant-propos" class="nav-link active" data-scroll-target="#avant-propos">Avant propos</a>
+  <ul class="collapse">
+  <li><a href="#contenu" id="toc-contenu" class="nav-link" data-scroll-target="#contenu">Contenu…</a></li>
+  <li><a href="#ce-que-vous-serez-capable-de-faire-à-la-fin-de-cette-formation" id="toc-ce-que-vous-serez-capable-de-faire-à-la-fin-de-cette-formation" class="nav-link" data-scroll-target="#ce-que-vous-serez-capable-de-faire-à-la-fin-de-cette-formation">Ce que vous serez capable de faire à la fin de cette formation</a></li>
+  <li><a href="#cible" id="toc-cible" class="nav-link" data-scroll-target="#cible">Cible</a></li>
+  <li><a href="#préréquis" id="toc-préréquis" class="nav-link" data-scroll-target="#préréquis">Préréquis</a></li>
+  <li><a href="#différentes-débouchées" id="toc-différentes-débouchées" class="nav-link" data-scroll-target="#différentes-débouchées">Différentes débouchées</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Collecte de données mobile avec ODK</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>FDTK </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 3, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="avant-propos" class="level1 unnumbered">
+<h1 class="unnumbered">Avant propos</h1>
+<p>Ce document est un manuel de formation sur la collecte de données mobile dispensée par <a href="https://www.fdtk.org">fdtk</a>. Il a pour but de fournir aux apprenants un document auquel ils pourront se référer pour avoir plus de détail sur le contenu de la formation.</p>
+<p>Il est organisé en 8 chapitres permettant d’aquérrir des compétances en création des formulaires pour la collecte de donéees utilisant des smartphones/tablettes avec l’application ODK(Open Data Kit).</p>
+<section id="contenu" class="level2">
+<h2 class="anchored" data-anchor-id="contenu">Contenu…</h2>
+<p>Le premier chapitre donne une introduction à la collecte de données, en explorant différentes méthodes de collecte de données. Le deuxième porte sur le questionniare. Il permet d’avoir une vue globale de ce qu’est le questionnaire ainsi les différents type de questions.</p>
+<p>Le troisième chapitre introduit la notion de base de données. Sans entrer en profondeur de la théorie des bases de données, il donne quelques définitions et décrit les types de variables statistiques.</p>
+<p>Le quatrième chapitre présente la suite ODK comme outils de collecte de données mobile. Il montre comment les différents outils ODK aident à la mise en place d’une collecte de données de qualité. Il montre ce que vous devez avoir pour débuter le travail.</p>
+<p>Le cinquième et sixième chapitres nous plongent au coeur de la création des formulaires. Ils présentent les différents types de variables supportées par ODK et comment les mettre en oeuvre.</p>
+<p>Le chapitre 7 concerne la synchronisastion de données et montre comment paramétrer un serveur pour héberger les données collectées. Il montre également comment paramétrer les smartphones pour qu’ils téléchargent les formulaires et envoient les données collectées. On évoque aussi quelques opérations dans le serveur telles que le téléchargement des données collectées.</p>
+<p>Le dernier chapitre décrit différents projets sur lesquels les apprenants sont appelés à travailler pour solidifier les connaissances acquises. Il s’agit des questionnaires réels sur lesquels ils devront créer des formulaires et les déployer.</p>
+</section>
+<section id="ce-que-vous-serez-capable-de-faire-à-la-fin-de-cette-formation" class="level2">
+<h2 class="anchored" data-anchor-id="ce-que-vous-serez-capable-de-faire-à-la-fin-de-cette-formation">Ce que vous serez capable de faire à la fin de cette formation</h2>
+<p>A la fin de cette formation, les apprenants seront capables de :</p>
+<ul>
+<li>connaitre les différentes méthodes de collecte de données, leurs avantages et incovénients,</li>
+<li>connaitreles composantes d’un questionnaire,</li>
+<li>connaitre ce que sont les bases de données,</li>
+<li>créer des formulaires simple et complexes à partir d’un tableur (Excel ou Open Office),</li>
+<li>assurer la qualité de données avec des sauts et contraintes,</li>
+<li>paramétrer un serveur et les téléphones pour gérer les données collectées,</li>
+<li>exporter les données collectées vers les logiciels d’analyse (Exel, SPSS,…),</li>
+<li>réaliser l’analyse exploratoire sur R avec les données collectées</li>
+</ul>
+<p>En somme, cette formation vous permettra de mettre en oeuvre la collecte de données mobile dans le cadre dans projet réel.</p>
+</section>
+<section id="cible" class="level2">
+<h2 class="anchored" data-anchor-id="cible">Cible</h2>
+<p>Cette formation est destinée à toute personne désiseuse d’acquérir des compétances en collecte de données statistiques utilisant les smartphones/tablettes.</p>
+</section>
+<section id="préréquis" class="level2">
+<h2 class="anchored" data-anchor-id="préréquis">Préréquis</h2>
+<p>Connaissance de base en bureautique : l’utilisation élémentaire d’excel et la gestion des fichiers.</p>
+</section>
+<section id="différentes-débouchées" class="level2">
+<h2 class="anchored" data-anchor-id="différentes-débouchées">Différentes débouchées</h2>
+<p>Avec les compétences acquises au cours de cette formation, vous maximiserez vos chances de travailler pour des postes de Spécialiste Suivi-Evaluation, Assistant Suivi-Evaluation, gestionnaire de base de données, Analyste de données, responsable des enquêtes, expert en étude de marchés, statisticien…</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./intro.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à collecte de données mobile</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
